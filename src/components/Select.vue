@@ -5,7 +5,7 @@ interface Data {
 }
 const props = withDefaults(defineProps<{
   value?: string
-  list: () => Data[]
+  list?: () => Data[]
 }>(), {
   value: '江西农业大学南昌商学院',
   list: () => [
