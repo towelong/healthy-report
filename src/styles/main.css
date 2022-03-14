@@ -1,0 +1,66 @@
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html.dark {
+  background: #121212;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+}
+a.item {
+  padding: 0.8em 1.1em;
+  background: transparent;
+  font-size: 1.1rem;
+}
+
+.overflow-x-overlay {
+  overflow-x: auto;
+  overflow-x: overlay;
+}
+
+.overflow-y-overlay {
+  overflow-y: auto;
+  overflow-y: overlay;
+}
+
+/* Scrollbar */
+* {
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  scrollbar-width: 6px;
+  scrollbar-color: transparent;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+*:hover::-webkit-scrollbar {
+  display: block;
+}
+
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(128, 128, 128, 0.5);
+  border-radius: 3px;
+}
