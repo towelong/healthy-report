@@ -12,6 +12,6 @@ const schoolName = ref('江西农业大学')
     <button class="btn">
       登录
     </button>
+    <Select :value="schoolName" />
   </div>
-  <Select :value="schoolName" />
 </template>
