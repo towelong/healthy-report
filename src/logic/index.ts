@@ -22,18 +22,26 @@ export function useUploadInformation() {
   const studentId = ref<string>('')
   const address = ref<string>('')
   const schoolId = ref<string>('')
-  const { post, data, execute, error } = useAuthFetch('/information',
+  const { post, statusCode, execute, error } = useAuthFetch('/information',
     { immediate: false }).json()
 
   watchEffect(() => {
     post({ student_id: studentId.value, school_id: schoolId.value, address: address.value })
   })
   return {
-    data,
+    statusCode,
     execute,
     schoolId,
     studentId,
     address,
+    error,
+  }
+}
+
+export async function useUserInformation() {
+  const { data, error } = await useAuthFetch('/information').get().json()
+  return {
+    data,
     error,
   }
 }

@@ -7,7 +7,9 @@ declare module 'vue' {
     Auth: typeof import('./src/components/Auth.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     Modal: typeof import('./src/components/Modal.vue')['default']
-    Select: typeof import('./src/components/Select.vue')['default']
+    Select: typeof import('./src/components/select/Select.vue')['default']
+    'Select copy': typeof import('./src/components/select/Select copy.vue')['default']
+    SelectItem: typeof import('./src/components/select/SelectItem.vue')['default']
     WithAuth: typeof import('./src/components/WithAuth.vue')['default']
   }
 }
