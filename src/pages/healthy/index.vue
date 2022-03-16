@@ -5,7 +5,7 @@ import { useUserStore } from '~/store'
 const { schoolId, studentId, address, execute, statusCode } = useUploadInformation()
 onMounted(async() => {
   const { data } = await useUserInformation()
-  schoolId.value = data.value.school_id
+  schoolId.value = data.value.school_id ? data.value.school_id : ''
   studentId.value = data.value.student_id
   address.value = data.value.address
 })

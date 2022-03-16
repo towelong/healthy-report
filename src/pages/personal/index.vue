@@ -6,8 +6,8 @@ const user = useUserStore()
 const username = computed(() => user.username)
 
 const logout = () => {
-  user.$reset()
   localStorage.removeItem('user-info')
+  user.$reset()
   router.push('/')
 }
 </script>
