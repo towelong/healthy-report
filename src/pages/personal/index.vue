@@ -6,13 +6,15 @@ const username = computed(() => user.username)
 </script>
 
 <template>
-  <div flex flex-col items-center justify-center gap-4 my-4 m-auto>
-    <div font-serif>
-      欢迎👏🏻，{{ username }}
+  <WithAuth>
+    <div flex flex-col items-center justify-center gap-4 my-4 m-auto>
+      <div font-serif>
+        欢迎👏🏻，{{ username }}
+      </div>
+      <div flex justify-center items-center cursor-pointer px-2 py-1 border="~ light-200" dark="border-dark-200" shadow text-sm hover:bg-light-300 dark:hover="bg-dark-50">
+        <div i-carbon-logout />
+        <div>退出</div>
+      </div>
     </div>
-    <div flex justify-center items-center cursor-pointer px-2 py-1 border="~ light-200" dark="border-dark-200" shadow text-sm hover:bg-light-300 dark:hover="bg-dark-50">
-      <div i-carbon-logout />
-      <div>退出</div>
-    </div>
-  </div>
+  </WithAuth>
 </template>

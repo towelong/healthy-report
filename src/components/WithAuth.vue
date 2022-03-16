@@ -2,8 +2,10 @@
 import { useUserStore } from '~/store'
 const user = useUserStore()
 const router = useRouter()
-if (user.token && user.username)
-  router.push('/')
+const token = computed(() => user.token)
+const username = computed(() => user.username)
+if (!token.value || !username.value)
+  router.push('/login')
 
 </script>
 

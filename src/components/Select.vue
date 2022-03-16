@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 interface Data {
   id: string
   name: string
@@ -12,25 +13,28 @@ const props = withDefaults(defineProps<{
   tips: '请选择',
   list: () => [
     {
-      id: '1',
+      id: '4136013436',
       name: '江西农业大学南昌商学院',
     },
-    {
-      id: '2',
-      name: '江西农业大学南昌商学院',
-    },
-    {
-      id: '3',
-      name: '江西农业大学南昌商学院',
-    },
+    // {
+    //   id: '2',
+    //   name: '江西农业大学南昌商学院',
+    // },
+    // {
+    //   id: '3',
+    //   name: '江西农业大学南昌商学院',
+    // },
   ],
 })
+const emit = defineEmits<{
+  (event: 'school', value: string): void
+}>()
 
 const inputValue = ref(props.value)
 
 const isShow = ref(false)
 
-const show = () => {
+const toggle = () => {
   isShow.value = !isShow.value
 }
 
@@ -40,7 +44,8 @@ const clear = () => {
 
 const handleClick = (data: Data) => {
   inputValue.value = data.name
-  show()
+  emit('school', data.id)
+  toggle()
 }
 
 </script>
@@ -60,7 +65,7 @@ const handleClick = (data: Data) => {
               </svg>
             </button>
           </div>
-          <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l dark:border-l-gray-500 flex items-center border-gray-200 svelte-1l8159u" @click="show">
+          <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l dark:border-l-gray-500 flex items-center border-gray-200 svelte-1l8159u" @click="toggle">
             <button class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">
               <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up w-4 h-4">
                 <polyline points="18 15 12 9 6 15" />
