@@ -1,0 +1,34 @@
+<script setup lang="ts">
+import { useRegister } from '~/logic'
+
+const { execute, data, statusCode, account, pwd, error } = useRegister()
+
+async function register() {
+  await execute()
+  if (statusCode.value === 200) {
+    account.value = ''
+    pwd.value = ''
+  }
+}
+
+</script>
+
+<template>
+  <div flex flex-col items-center justify-center gap-4 mt-16 m-auto>
+    <input v-model="account" type="text" placeholder="请输入用户名" class="ipt">
+    <input v-model="pwd" type="password" placeholder="请输入密码" class="ipt">
+    <template v-if="error">
+      <p text-red-400>
+        {{ data.code > 0 ? data.msg : "" }}
+      </p>
+    </template>
+    <template v-if="statusCode == 200">
+      <p text-teal-700>
+        注册成功
+      </p>
+    </template>
+    <button class="btn" @click="register">
+      注册
+    </button>
+  </div>
+</template>

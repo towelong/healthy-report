@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { useUserStore } from '~/store'
 
+const router = useRouter()
 const user = useUserStore()
 const username = computed(() => user.username)
+
+const logout = () => {
+  user.$reset()
+  localStorage.removeItem('user-info')
+  router.push('/')
+}
 </script>
 
 <template>
@@ -11,7 +18,10 @@ const username = computed(() => user.username)
       <div font-serif>
         欢迎👏🏻，{{ username }}
       </div>
-      <div flex justify-center items-center cursor-pointer px-2 py-1 border="~ light-200" dark="border-dark-200" shadow text-sm hover:bg-light-300 dark:hover="bg-dark-50">
+      <div
+        flex justify-center items-center cursor-pointer px-2 py-1 border="~ light-200" dark="border-dark-200" shadow text-sm hover:bg-light-300 dark:hover="bg-dark-50"
+        @click="logout"
+      >
         <div i-carbon-logout />
         <div>退出</div>
       </div>

@@ -17,6 +17,25 @@ export function useLogin() {
     error,
   }
 }
+// useRegister
+export function useRegister() {
+  const account = ref('')
+  const pwd = ref('')
+  const { post, data, statusCode, execute, error } = useNormalFetch('/register',
+    { immediate: false }).json()
+
+  watchEffect(() => {
+    post({ username: account.value, password: pwd.value })
+  })
+  return {
+    data,
+    statusCode,
+    execute,
+    account,
+    pwd,
+    error,
+  }
+}
 
 export function useUploadInformation() {
   const studentId = ref<string>('')

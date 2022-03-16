@@ -6,11 +6,15 @@ const user = useUserStore()
 const router = useRouter()
 const { execute, data, account, pwd, error } = useLogin()
 
+function goto(path: string) {
+  router.push(path)
+}
+
 async function login() {
   await execute()
   if (data.value.token) {
     user.createUser(account.value, data.value.token)
-    router.push('/')
+    goto('/')
   }
 }
 
@@ -27,6 +31,9 @@ async function login() {
       <button class="btn" @click="login">
         登录
       </button>
+      <p text-sm cursor-pointer hover:text-teal-700 hover:underline="~ offset-2" @click="goto('/register')">
+        没有账号?去注册
+      </p>
     </div>
   </WithAuth>
 </template>
