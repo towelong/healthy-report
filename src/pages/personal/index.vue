@@ -1,17 +1,18 @@
 <script setup lang="ts">
-const schoolName = ref('江西农业大学')
+import { useUserStore } from '~/store'
+
+const user = useUserStore()
+const username = computed(() => user.username)
 </script>
 
 <template>
   <div flex flex-col items-center justify-center gap-4 my-4 m-auto>
     <div font-serif>
-      欢迎👏🏻，鹏宇
+      欢迎👏🏻，{{ username }}
     </div>
-    <input type="text" placeholder="请输入学号" class="ipt">
-    <input type="password" placeholder="请输入签到地址" class="ipt">
-    <button class="btn">
-      登录
-    </button>
-    <Select :value="schoolName" />
+    <div flex justify-center items-center cursor-pointer px-2 py-1 border="~ light-200" dark="border-dark-200" shadow text-sm hover:bg-light-300 dark:hover="bg-dark-50">
+      <div i-carbon-logout />
+      <div>退出</div>
+    </div>
   </div>
 </template>

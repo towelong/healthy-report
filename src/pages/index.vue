@@ -1,14 +1,7 @@
 <script setup lang="ts">
-
-// const name = $ref('')
-const mark = ref(false)
-
 const router = useRouter()
 const go = () => {
   router.push('/healthy')
-}
-const open = () => {
-  mark.value = !mark.value
 }
 </script>
 
@@ -31,18 +24,5 @@ const open = () => {
         </a>
       </template>
     </div>
-    <div>
-      <button
-        class="m-3 text-sm btn"
-        @click="open()"
-      >
-        Modal
-      </button>
-    </div>
-    <Modal v-model="mark" direction="top">
-      <div font-serif h-40 bg-white dark:bg-dark-100>
-        Hello
-      </div>
-    </Modal>
   </div>
 </template>

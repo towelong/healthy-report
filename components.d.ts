@@ -4,9 +4,11 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Auth: typeof import('./src/components/Auth.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     Modal: typeof import('./src/components/Modal.vue')['default']
     Select: typeof import('./src/components/Select.vue')['default']
+    WithAuth: typeof import('./src/components/WithAuth.vue')['default']
   }
 }
 
