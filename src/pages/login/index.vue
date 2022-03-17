@@ -1,7 +1,16 @@
 <script setup lang="ts">
+import { useHead } from '@vueuse/head'
 import { useLogin } from '~/logic'
 import { useUserStore } from '~/store'
-
+useHead({
+  title: '登录 - 工具箱',
+  meta: [
+    {
+      name: 'description',
+      content: '一个工具箱',
+    },
+  ],
+})
 const user = useUserStore()
 const router = useRouter()
 const { execute, data, account, pwd, error } = useLogin()

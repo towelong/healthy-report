@@ -1,7 +1,16 @@
 <script setup lang="ts">
+import { useHead } from '@vueuse/head'
 import { useEditUserInformation, useUploadInformation, useUserInformation } from '~/logic'
 import { useUserStore } from '~/store'
-
+useHead({
+  title: '健康打卡 - 工具箱',
+  meta: [
+    {
+      name: 'description',
+      content: '一个工具箱',
+    },
+  ],
+})
 const { schoolId, studentId, address, execute, statusCode, uploadData } = useUploadInformation()
 const { data } = useUserInformation()
 const { payload, httpCode, change } = useEditUserInformation(studentId, schoolId, address)
@@ -63,6 +72,9 @@ async function edit() {
       </p>
       <p text-sm>
         如: 江西省赣州市章贡区文明大道99号
+      </p>
+      <p text-sm>
+        <span text-red-500>*</span> 每日7点自动打卡
       </p>
       <!-- 上传成功提示信息 -->
       <template v-if="statusCode == 200 && uploadData">

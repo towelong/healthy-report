@@ -1,6 +1,16 @@
 <script setup lang="ts">
+import { useHead } from '@vueuse/head'
 import { useRegister } from '~/logic'
 
+useHead({
+  title: '注册 - 工具箱',
+  meta: [
+    {
+      name: 'description',
+      content: '一个工具箱',
+    },
+  ],
+})
 const { execute, data, statusCode, account, pwd, error } = useRegister()
 
 async function register() {

@@ -21,6 +21,7 @@
     "@unocss/reset": "^0.27.6",
     "@vitejs/plugin-vue": "^2.2.4",
     "@vue/test-utils": "^2.0.0-rc.18",
+    "@vueuse/head": "^0.7.5",
     "eslint": "^8.10.0",
     "jsdom": "^19.0.0",
     "pinia": "^2.0.12",

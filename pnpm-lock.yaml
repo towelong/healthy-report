@@ -8,6 +8,7 @@ specifiers:
   '@vitejs/plugin-vue': ^2.2.4
   '@vue/test-utils': ^2.0.0-rc.18
   '@vueuse/core': ^8.0.0
+  '@vueuse/head': ^0.7.5
   eslint: ^8.10.0
   jsdom: ^19.0.0
   pinia: ^2.0.12
@@ -35,6 +36,7 @@ devDependencies:
   '@unocss/reset': 0.27.6
   '@vitejs/plugin-vue': 2.2.4_vite@2.8.6+vue@3.2.31
   '@vue/test-utils': 2.0.0-rc.18_vue@3.2.31
+  '@vueuse/head': 0.7.5_vue@3.2.31
   eslint: 8.10.0
   jsdom: 19.0.0
   pinia: 2.0.12_typescript@4.6.2+vue@3.2.31
@@ -808,6 +810,14 @@ packages:
       vue: 3.2.31
       vue-demi: 0.12.1_vue@3.2.31
     dev: false
+
+  /@vueuse/head/0.7.5_vue@3.2.31:
+    resolution: {integrity: sha512-L+XQ5Act0nT/ZyO8Qo10J4FyM1qPOyQb6MT4MMn6+AITzrStpmKs/nUDDLJKD/rCcNWl/65XbdQm4T2vKp3VOQ==}
+    peerDependencies:
+      vue: '>=3'
+    dependencies:
+      vue: 3.2.31
+    dev: true
 
   /@vueuse/metadata/8.0.0:
     resolution: {integrity: sha512-23R9pqgfJnfmUnGCOtaDkwaNYEAO7N6whvaAFAs5D5xHXgqAj+z/tLhwQzSJw/ZzJGUb8W5L+VgP9S7SL35riw==}

@@ -1,5 +1,15 @@
 <script setup lang="ts">
+import { useHead } from '@vueuse/head'
 import { useUserStore } from '~/store'
+useHead({
+  title: '个人中心 - 工具箱',
+  meta: [
+    {
+      name: 'description',
+      content: '一个工具箱',
+    },
+  ],
+})
 
 const router = useRouter()
 const user = useUserStore()

@@ -1,8 +1,18 @@
 <script setup lang="ts">
+import { useHead } from '@vueuse/head'
 const router = useRouter()
 const go = () => {
   router.push('/healthy')
 }
+useHead({
+  title: '工具箱',
+  meta: [
+    {
+      name: 'description',
+      content: '一个工具箱',
+    },
+  ],
+})
 </script>
 
 <template>
