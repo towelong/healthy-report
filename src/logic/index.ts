@@ -1,3 +1,4 @@
+import type { Ref } from 'vue'
 import { useAuthFetch, useNormalFetch } from '~/request'
 
 export function useLogin() {
@@ -41,7 +42,7 @@ export function useUploadInformation() {
   const studentId = ref<string>('')
   const address = ref<string>('')
   const schoolId = ref<string>('')
-  const { post, statusCode, execute, error } = useAuthFetch('/information',
+  const { post, statusCode, execute, error, data } = useAuthFetch('/information',
     { immediate: false }).json()
 
   watchEffect(() => {
@@ -54,6 +55,23 @@ export function useUploadInformation() {
     studentId,
     address,
     error,
+    uploadData: data,
+  }
+}
+
+export function useEditUserInformation(studentId: Ref<string>, schoolId: Ref<string>, address: Ref<string>) {
+  const { put, data, statusCode, execute, error } = useAuthFetch('/information',
+    { immediate: false }).json()
+
+  watchEffect(() => {
+    put({ student_id: studentId.value, school_id: schoolId.value, address: address.value })
+  })
+
+  return {
+    payload: data,
+    change: execute,
+    httpCode: statusCode,
+    editError: error,
   }
 }
 
