@@ -29,7 +29,7 @@ useHead({
           </div>
           <div flex-auto>
             <div class="font-serif opacity-70 text-lg font-medium group-hover:opacity-100">健康打卡{{ i }}</div>
-            <div class="desc text-sm opacity-50 font-normal group-hover:opacity-70">Toolkit for generating sponsors images</div>
+            <div class="desc text-sm opacity-50 font-normal group-hover:opacity-70">支付宝防疫打卡</div>
           </div>
         </a>
       </template>
