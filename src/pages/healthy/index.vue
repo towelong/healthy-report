@@ -3,18 +3,23 @@ import { useUploadInformation, useUserInformation } from '~/logic'
 import { useUserStore } from '~/store'
 
 const { schoolId, studentId, address, execute, statusCode } = useUploadInformation()
-onMounted(async() => {
-  const { data } = await useUserInformation()
-  schoolId.value = data.value.school_id ? data.value.school_id : ''
-  studentId.value = data.value.student_id
-  address.value = data.value.address
+const { data } = useUserInformation()
+
+watch(data, (dataVal) => {
+  if (dataVal) {
+    schoolId.value = dataVal.school_id ? dataVal.school_id : ''
+    studentId.value = dataVal.student_id
+    address.value = dataVal.address
+  }
 })
+
 const user = useUserStore()
 const router = useRouter()
 
 async function submit() {
   await execute()
   if ((statusCode.value as number) !== 200) {
+    localStorage.removeItem('user-info')
     user.$reset()
     router.push('/login')
   }
@@ -23,7 +28,8 @@ async function submit() {
 
 <template>
   <WithAuth>
-    <div flex flex-col items-center justify-center gap-4 my-4 m-auto>
+    <Loading v-if="!data" />
+    <div v-else flex flex-col items-center justify-center gap-4 my-4 m-auto>
       <select v-model="schoolId" text-sm outline-none border="~ gray-200" dark:border=" dark-200" shadow px-2 py-2 w-60 bg-transparent>
         <option value="">
           请选择学校

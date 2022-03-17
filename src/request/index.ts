@@ -14,9 +14,11 @@ export const useAuthFetch = createFetch({
       }
       return { options }
     },
-    afterFetch(ctx) {
-      if (ctx.response.status === 401)
+    onFetchError(ctx) {
+      if (ctx.data.code === 401) {
+        localStorage.removeItem('user-info')
         user.$reset()
+      }
       return ctx
     },
   },

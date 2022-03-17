@@ -57,8 +57,8 @@ export function useUploadInformation() {
   }
 }
 
-export async function useUserInformation() {
-  const { data, error } = await useAuthFetch('/information').get().json()
+export function useUserInformation() {
+  const { data, error } = useAuthFetch('/information').get().json()
   return {
     data,
     error,
