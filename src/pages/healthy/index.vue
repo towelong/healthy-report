@@ -11,25 +11,32 @@ useHead({
     },
   ],
 })
-const { schoolId, studentId, address, execute, statusCode, uploadData } = useUploadInformation()
 const { data } = useUserInformation()
+const { schoolId, studentId, address, execute, statusCode, uploadData, error } = useUploadInformation()
 const { payload, httpCode, change } = useEditUserInformation(studentId, schoolId, address)
-// 输入框编辑状态
-const isEdit = ref(false)
-// 信息上传按钮的状态
-const isClick = ref(false)
-const toggleEdit = useToggle(isEdit)
-// const toggleClick = useToggle(isClick)
 
+// 是否可编辑
+const editState = ref(false)
+const submitState = ref(false)
+const changeState = ref(false)
+const subChangeState = ref(false)
+const toggleSubmitState = useToggle(submitState)
+const toggleEditState = useToggle(editState)
+const toggleSubChangeState = useToggle(subChangeState)
 watch(data, (dataVal) => {
   if (dataVal) {
     schoolId.value = dataVal.school_id ? dataVal.school_id : ''
     studentId.value = dataVal.student_id
     address.value = dataVal.address
+    toggleSubmitState()
     // 不存在任务
     if (dataVal.code === 404) {
-      isEdit.value = true
-      isClick.value = true
+      editState.value = true
+      submitState.value = true
+    }
+    else {
+      changeState.value = true
+      submitState.value = false
     }
   }
 })
@@ -43,12 +50,14 @@ async function submit() {
     user.removeUser()
     router.push('/login')
   }
-  isClick.value = false
+  editState.value = false
+  changeState.value = true
+  submitState.value = false
 }
 
-async function edit() {
-  await change()
-  isEdit.value = false
+function subChange() {
+  toggleEditState()
+  toggleSubChangeState()
 }
 
 </script>
@@ -57,7 +66,7 @@ async function edit() {
   <WithAuth>
     <Loading v-if="!data" />
     <div v-else flex flex-col items-center justify-center gap-4 my-4 m-auto>
-      <select v-model="schoolId" :disabled="!isEdit" text-sm outline-none border="~ gray-200" dark:border=" dark-200" shadow px-2 py-2 w-60 bg-transparent>
+      <select v-model="schoolId" :disabled="!editState" text-sm outline-none border="~ gray-200" dark:border=" dark-200" shadow px-2 py-2 w-60 bg-transparent>
         <option value="">
           请选择学校
         </option>
@@ -65,8 +74,8 @@ async function edit() {
           江西农业大学南昌商学院
         </option>
       </select>
-      <input v-model="studentId" :disabled="!isEdit" type="text" placeholder="请输入学号" class="ipt">
-      <input v-model="address" :disabled="!isEdit" type="text" placeholder="请输入签到地址" class="ipt">
+      <input v-model="studentId" :disabled="!editState" type="text" placeholder="请输入学号" class="ipt">
+      <input v-model="address" :disabled="!editState" type="text" placeholder="请输入签到地址" class="ipt">
       <p text-sm>
         <span text-red-500>*</span> 请输入完整的地址否则将导致定位失败
       </p>
@@ -82,6 +91,11 @@ async function edit() {
           {{ uploadData.msg }}
         </p>
       </template>
+      <template v-if="error">
+        <p text-sm text-red-400>
+          {{ data.code > 0 ? data.msg : "" }}
+        </p>
+      </template>
       <!-- 修改成功提示信息 -->
       <template v-if="httpCode == 200 && payload">
         <p text-sm text-teal-700>
@@ -89,16 +103,19 @@ async function edit() {
         </p>
       </template>
       <div flex text-sm gap-2>
-        <button v-if="isClick" class="btn" @click="submit">
+        <button v-if="submitState" class="btn" @click="submit">
           提交
         </button>
         <!-- 编辑状态下的按钮 -->
-        <button v-if="!isClick" class="btn" :disabled="isEdit" @click="toggleEdit()">
-          修改
-        </button>
-        <button v-if="isEdit && !isClick" class="btn" @click="edit">
-          提交1
-        </button>
+
+        <template v-if="changeState">
+          <button btn :disabled="subChangeState" @click="subChange">
+            修改
+          </button>
+          <button v-if="subChangeState" btn @click="change()">
+            提交1
+          </button>
+        </template>
       </div>
     </div>
   </WithAuth>

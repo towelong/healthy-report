@@ -33,7 +33,7 @@ async function register() {
       </p>
     </template>
     <template v-if="statusCode == 200">
-      <p text-teal-700>
+      <p text-teal-700 text-sm>
         注册成功
       </p>
     </template>

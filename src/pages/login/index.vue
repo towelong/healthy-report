@@ -35,7 +35,9 @@ async function login() {
       <input v-model="account" type="text" placeholder="请输入用户名" class="ipt">
       <input v-model="pwd" type="password" placeholder="请输入密码" class="ipt">
       <template v-if="error">
-        {{ data.code > 0 ? data.msg : "" }}
+        <p text-sm text-red-400>
+          {{ data.code > 0 ? data.msg : "" }}
+        </p>
       </template>
       <button class="btn" @click="login">
         登录
