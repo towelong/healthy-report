@@ -1,11 +1,11 @@
 import { createFetch } from '@vueuse/core'
+import { apiBaseUrl } from '~/composables'
 import { useUserStore } from '~/store'
 
-const url = 'http://localhost:8016'
 const user = useUserStore()
 
 export const useAuthFetch = createFetch({
-  baseUrl: url,
+  baseUrl: apiBaseUrl,
   options: {
     beforeFetch({ options }) {
       options.headers = {
@@ -25,5 +25,5 @@ export const useAuthFetch = createFetch({
 })
 
 export const useNormalFetch = createFetch({
-  baseUrl: url,
+  baseUrl: apiBaseUrl,
 })
