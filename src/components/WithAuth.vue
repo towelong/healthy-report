@@ -4,8 +4,10 @@ const user = useUserStore()
 const router = useRouter()
 const token = computed(() => user.token)
 const username = computed(() => user.username)
-if (!token.value || !username.value)
-  router.push('/login')
+watchEffect(() => {
+  if (!token.value || !username.value)
+    router.push('/login')
+})
 
 </script>
 
