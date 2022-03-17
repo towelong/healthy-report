@@ -4,11 +4,12 @@ import { defineStore } from 'pinia'
 //   username: string
 //   token: string
 // }
+const USER_STORE = 'user-info'
 
 export const useUserStore = defineStore('user', {
   state: () => {
     const user = ref(
-      useLocalStorage('user-info', {
+      useLocalStorage(USER_STORE, {
         username: '',
         token: '',
       }),
@@ -25,6 +26,10 @@ export const useUserStore = defineStore('user', {
     createUser(username: string, token: string) {
       this.user.username = username
       this.user.token = token
+    },
+    removeUser() {
+      localStorage.removeItem(USER_STORE)
+      this.$reset()
     },
   },
 })

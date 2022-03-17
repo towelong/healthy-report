@@ -19,8 +19,7 @@ const router = useRouter()
 async function submit() {
   await execute()
   if ((statusCode.value as number) !== 200) {
-    localStorage.removeItem('user-info')
-    user.$reset()
+    user.removeUser()
     router.push('/login')
   }
 }
