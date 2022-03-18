@@ -12,12 +12,15 @@ useHead({
   ],
 })
 const { execute, data, statusCode, account, pwd, error } = useRegister()
-
+const router = useRouter()
 async function register() {
   await execute()
   if (statusCode.value === 200) {
     account.value = ''
     pwd.value = ''
+    setTimeout(() => {
+      router.push('/login')
+    }, 500)
   }
 }
 
