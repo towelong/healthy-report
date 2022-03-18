@@ -14,9 +14,12 @@ const open = () => {
 <template>
   <div border="b base">
     <div class="flex items-center max-w-[60ch] py-4 px-4 ma">
-      <div text-xl>
+      <div text-xl flex gap-2>
         <button>
           <div i-carbon-help cursor-pointer @click="open()" />
+        </button>
+        <button>
+          <div i-carbon-settings cursor-pointer @click="open()" />
         </button>
       </div>
       <div grow>
