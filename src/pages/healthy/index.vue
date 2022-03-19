@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useHead } from '@vueuse/head'
 import { useEditUserInformation, useUploadInformation, useUserInformation } from '~/logic'
-import { useUserStore } from '~/store'
+
 useHead({
   title: '健康打卡 - 工具箱',
   meta: [
@@ -13,7 +13,7 @@ useHead({
 })
 const { data } = useUserInformation()
 const { schoolId, studentId, address, execute, statusCode, uploadData, error } = useUploadInformation()
-const { payload, httpCode, change } = useEditUserInformation(studentId, schoolId, address)
+const { payload, httpCode, change, editError } = useEditUserInformation(studentId, schoolId, address)
 
 // 是否可编辑
 const editState = ref(false)
@@ -41,18 +41,13 @@ watch(data, (dataVal) => {
   }
 })
 
-const user = useUserStore()
-const router = useRouter()
-
 async function submit() {
   await execute()
-  if ((statusCode.value as number) !== 200) {
-    user.removeUser()
-    router.push('/login')
+  if (!error.value) {
+    editState.value = false
+    changeState.value = true
+    submitState.value = false
   }
-  editState.value = false
-  changeState.value = true
-  submitState.value = false
 }
 
 function subChange() {
@@ -93,11 +88,16 @@ function subChange() {
       </template>
       <template v-if="error">
         <p text-sm text-red-400>
-          {{ data.code > 0 ? data.msg : "" }}
+          {{ uploadData.code > 0 ? uploadData.msg : "" }}
         </p>
       </template>
       <!-- 修改成功提示信息 -->
       <template v-if="httpCode == 200 && payload">
+        <p text-sm text-teal-700>
+          {{ payload.msg }}
+        </p>
+      </template>
+      <template v-if="editError">
         <p text-sm text-teal-700>
           {{ payload.msg }}
         </p>
